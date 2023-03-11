@@ -1,0 +1,50 @@
+---
+- name: Déploiement d'un serveur NGINX
+  hosts: web
+  become: true
+
+  tasks:
+    - name: Installation de NGINX
+      dnf:
+        name: nginx
+        state: present
+
+    - name: Copie du certificat et de la clé
+      copy:
+        src: "{{ item }}"
+        dest: "/etc/pki/tls/{{ 'certs' if 'crt' in item else 'private' }}/{{ item }}"
+        mode: '0600'
+      with_items:
+        - "server.crt"
+        - "server.key"
+
+    - name: Création de la racine web et de l'index
+      file:
+        path: /var/www/tp1_site
+        state: directory
+        owner: nginx
+        group: nginx
+
+    - name: Création du fichier index.html
+      copy:
+        dest: /var/www/tp1_site/index.html
+        content: "<h1>Ceci est un test</h1>"
+        owner: nginx
+        group: nginx
+
+    - name: Déploiement du fichier de configuration NGINX
+      copy:
+        src: files/nginx.conf
+        dest: /etc/nginx/conf.d/tp1_site.conf
+
+    - name: Ouverture du port 443/TCP dans le firewall
+      firewalld:
+        permanent: yes
+        immediate: yes
+        port: "443/tcp"
+        state: enabled
+
+    - name: Redémarrage du service NGINX
+      service:
+        name: nginx
+        state: restarted

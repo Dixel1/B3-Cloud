@@ -1,0 +1,40 @@
+---
+- name: Déploiement d'un serveur NGINX
+  hosts: web
+  become: true
+
+  tasks:
+    - name: Installation de NGINX
+      dnf:
+        name: nginx
+        state: present
+
+    - name: Création de la racine web et de l'index
+      file:
+        path: /var/www/tp1_site
+        state: directory
+        owner: nginx
+        group: nginx
+
+    - name: Création du fichier index.html
+      copy:
+        dest: /var/www/tp1_site/index.html
+        content: "<h1>Ceci est un test</h1>"
+        owner: nginx
+        group: nginx
+
+    - name: Déploiement du fichier de configuration NGINX
+      copy:
+        src: files/nginx.conf
+        dest: /etc/nginx/conf.d/tp1_site.conf
+
+    - name: Ouverture du port 443/TCP dans le firewall
+      firewalld:
+        port: "443/tcp"
+        permanent: true
+        state: enabled
+
+    - name: Démarrage du service NGINX
+      service:
+        name: nginx
+        state: started

@@ -1,0 +1,40 @@
+---
+- name: Install MariaDB
+  hosts: db
+  become: yes
+
+  tasks:
+    - name: Installation de MariaDB
+      dnf:
+        name:
+          - mariadb-server
+          - python3-PyMySQL
+        state: present
+
+    - name: Redémarrage du serveur MariaDB
+      service:
+        name: mariadb
+        state: restarted
+
+#    - name: Connexion à la base SQL
+#      mysql_user:
+#        login_unix_socket: /var/lib/mysql/mysql.sock
+#        login_user: root
+#        name: root
+
+    - name: Création d'un utilisateur SQL
+      mysql_user:
+        login_unix_socket: /var/lib/mysql/mysql.sock
+        login_user: root
+        name: user1
+        password: "P@ssword"
+        #name: admin
+        priv: "*.*:ALL"
+        state: present
+
+    - name: Créer une base de données
+      mysql_db:
+        name: mydb
+        state: present
+        login_user: user1
+        login_password: P@ssword
