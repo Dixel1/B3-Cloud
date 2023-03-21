@@ -1,5 +1,24 @@
-users:
-  - le_nain
-  - l_elfe
-  - le_ranger
+#users:
+#  - le_nain
+#  - l_elfe
+#  - le_ranger
 
+users:
+  - name: le_nain
+    password: <password_hash>
+    homedir: /home/le_nain
+    sudo: yes
+    group: admin
+    ssh_key: <public_ssh_key>
+  - name: l_elfe
+    password: <password_hash>
+    homedir: /home/l_elfe
+    sudo: yes
+    group: admin
+    ssh_key: <public_ssh_key>
+  - name: le_ranger
+    password: <password_hash>
+    homedir: /home/le_ranger
+    sudo: yes
+    group: admin
+    ssh_key: <public_ssh_key>

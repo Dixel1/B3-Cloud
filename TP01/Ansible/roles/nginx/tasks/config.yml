@@ -1,6 +1,6 @@
 - name : Main NGINX config file
   become: true
   copy:
-    src: nginx.conf # pas besoin de préciser de path, il sait qu'il doit chercher dans le dossier files/
+    src: nginx.conf
     dest: /etc/nginx/nginx.conf
-
+    notify: restart nginx

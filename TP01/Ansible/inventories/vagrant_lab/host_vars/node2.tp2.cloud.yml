@@ -1,7 +1,4 @@
-common_packages:
-  - vim
-  - git
-  - rsync
+
 vhosts:
   - test2:
     nginx_servername: test2

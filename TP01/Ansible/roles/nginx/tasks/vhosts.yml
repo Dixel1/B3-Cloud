@@ -1,17 +1,40 @@
 - name: Create webroot
   become: true
   file:
-    path: "{{ nginx_webroot }}"
+    path: "{{ item.nginx_webroot }}"
     state: directory
+  with_items: "{{ vhosts }}"
 
 - name: Create index
   become: true
   copy:
-    dest: "{{ nginx_webroot }}/index.html"
-    content: "{{ nginx_index_content }}"
+    dest: "{{ item.nginx_webroot }}/index.html"
+    content: "{{ item.nginx_index_content }}"
+  with_items: "{{ vhosts }}"
 
 - name: NGINX Virtual Host
   become: true
   template:
     src: vhost.conf.j2
-    dest: /etc/nginx/conf.d/{{ nginx_servername }}.conf
+    dest: /etc/nginx/conf.d/{{ item.nginx_servername }}.conf
+  with_items: "{{ vhosts }}"
+
+- name: Authorize port
+  become: true
+  ansible.posix.firewalld:
+    port: "{{ item.nginx_port }}/tcp"
+    state: enabled
+  with_items: "{{ vhosts }}"
+
+- name: FW reload
+  become: true
+  service:
+    name: nginx
+    state: restarted
+
+- name: configure nginx
+  become: true
+  template:
+    src: vhost.conf.j2
+    dest: /etc/nginx/conf.d/vhost.conf
+    notify: restart nginx
