@@ -1,0 +1,24 @@
+#cloud-config
+
+users:
+  - name: Sarvagon
+    gecos: Super adminsys
+    primary_group: Sarvagon
+    groups: wheel
+    shell: /bin/bash
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    lock_passwd: false
+    passwd: $6$3YoRHhuvmQyiqJYm$UXOpyHHPPEQYvlnhLLsZ/TAMKK6It2OqaJeWaxKOQtIc3HCLgJ9JEq6XUqPB1D4jg.Fg33AEZCSWxhY5pd8a2/
+    ssh_authorized_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDa1jE+jVEMvAp7PIX6UHnf6ZGIo8Ba6NRlDp1qTYbxlAewod/qjERYlIspUupbng8bly3UnYfUfGNAIyutonEmX2K89rOumCtyAEl2CbcB1Yjuc9uUB9sRf0C6/TVZ5GaRWeuiGpSOo7FTSz4lH1hcH63TN0uvL4x7uS4yu9DLl4WXOzd81iYyzcnOTXsWYCiwyzRwhFeB/NJp+WlmdrGuu4ZYd4BBCtkUfUmjwTr3p6JhItpCzplo7Mm6iUPsNtvF1uPUn42r3XpE7YPP9ZhDtnuKr2U1DdpIXSGeK7yUehpDc6atJ4VZUFn0RO1ZMUlrXUDiPmUi7GSFU6cHaeZdPuBosilBHJnunyrF5a7PBpHueQtMQkQBVecT0XqRLYYt7m2lEbhBpUuwbXSoR3UUPtFBQKpfee8kcbP09WJ48fQHRxO51PjAmyyICwcmK5Y+ijdQmzO840G5l8+Xl2p6leX3Y6ywqd0/xBZNPKxUAToikXIW+rPUmq9KrHigPno4d2xlNXxyRJ3kirpqztMu7AV0z/nQ5bVcHJwn2a+wt8KcCoiOFD2X0fsXURUsv2Z5yn+zzwaul2F8FDHp9VliO3EJrD600fzH8pM/dFVZ5OEYRwrmzIJqJo8KSxsVbWdY+HPzPjHNBGg4S9j2DXz2NHKbizmTxlJJyfQjLn2ETQ== schaf@DESKTOP-AEJ9M2Q
+  - name: vagrant
+    gecos: vagrant user
+    primary_group: vagrant
+    groups: vagrant
+    shell: /bin/bash
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    lock_passwd: false
+    passwd: $6$wc5h17VdKBHii3RB$jcrbmoZqOukAMwZe4Ko3bxieg1EgbdOuFjYgQpgxqu42nqOWtU9aQJxD1P9uQJWtF36Bi3aqBSYbgVYo/TKFj/
+    ssh_authorized_keys: 
+      - ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vagrant insecure public key
+
