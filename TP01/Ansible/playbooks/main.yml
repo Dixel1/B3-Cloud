@@ -1,4 +1,6 @@
 - hosts: ynov
+  become: true
   roles:
     - common
     - nginx
+    - webapp
