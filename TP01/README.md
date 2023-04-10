@@ -17,4 +17,12 @@ Une petite liste non exaustive de raisons pour lesquelles adopter une telle stru
 - **Séparation des préoccupations :** en séparant les informations relatives aux hôtes des tâches et des playbooks d'Ansible, il est plus facile de comprendre le code et de le maintenir au fil du temps.
 - **Réutilisabilité accrue :** en utilisant des variables d'inventaire, on peut réutiliser les mêmes configurations pour plusieurs hôtes ou groupes d'hôtes similaires, ce qui évite la duplication de code et facilite la maintenance.
 
+## Les handlers :
+Un handler est une tâche Ansible qui est déclenchée en réponse à un événement généré par une autre tâche. Les handlers sont généralement utilisés pour effectuer des actions de gestion d'état, telles que redémarrer un service ou régénérer une configuration. Les handlers sont définis dans des fichiers séparés et sont référencés dans les tâches correspondantes via le mot-clé "notify". Lorsqu'un événement est signalé par une tâche, tous les handlers correspondants sont exécutés à la fin de l'exécution de la série de tâches.
+
+## Jinja2 :
+Un fichier Jinja2 est un modèle utilisé par le moteur de template Jinja2 pour générer des fichiers de configuration dynamiques dans le cadre d'un processus d'automatisation. Les fichiers Jinja2 contiennent du code source qui utilise une syntaxe spécifique pour définir les éléments à remplacer ou à itérer pendant la génération de fichiers.
+
+Les fichiers Jinja2 sont souvent utilisés en conjonction avec des outils d'automatisation tels que Ansible pour générer des fichiers de configuration personnalisés pour des applications telles que Nginx, Apache, MySQL, etc. En utilisant des fichiers Jinja2, il est possible de créer des fichiers de configuration réutilisables et modulaires qui peuvent être facilement adaptés à des environnements spécifiques en utilisant des variables personnalisées.
+
 ## Note : Ce TP contient des commentaires dont il ne faut pas tenir comptes (généralement du code mis en commentaire et précisé comme servant pour effectuer des tests).

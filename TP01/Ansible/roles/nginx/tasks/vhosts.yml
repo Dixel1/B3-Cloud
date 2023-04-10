@@ -1,3 +1,4 @@
+# Définit une tâche Ansible pour créer le chemin webroot
 - name: Create webroot
   become: true
   file:
@@ -5,6 +6,7 @@
     state: directory
   with_items: "{{ vhosts }}"
 
+# Définit une tâche Ansible qui va créer un fichier index.html dans le chemin webroot créé précedement
 - name: Create index
   become: true
   copy:
@@ -12,6 +14,7 @@
     content: "{{ item.nginx_index_content }}"
   with_items: "{{ vhosts }}"
 
+# Définit une tâche Ansible utilisant le module 'template' pour générer un fichier de configuration nginx personnalisé pour un virtual host défini dans la liste "vhosts"
 - name: NGINX Virtual Host
   become: true
   template:
@@ -19,6 +22,7 @@
     dest: /etc/nginx/conf.d/{{ item.nginx_servername }}.conf
   with_items: "{{ vhosts }}"
 
+# Définit une tâche Ansible qui utilise le module "ansible.posix.firewalld" pour autoriser l'accès à un port en utilisant le pare-feu Firewalld
 - name: Authorize port
   become: true
   ansible.posix.firewalld:
@@ -26,12 +30,14 @@
     state: enabled
   with_items: "{{ vhosts }}"
 
+# Définit une tâche Ansible qui utilise le module "service" pour redémarrer le service nginx après avoir effectué les changements nécessaires dans la configuration
 - name: FW reload
   become: true
   service:
     name: nginx
     state: restarted
 
+# Définit une tâche Ansible qui utilise le module "template" pour générer un fichier de configuration nginx personnalisé à partir d'un modèle Jinja2
 - name: configure nginx
   become: true
   template:

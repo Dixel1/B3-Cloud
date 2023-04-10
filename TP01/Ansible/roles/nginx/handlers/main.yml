@@ -1,4 +1,5 @@
 ---
+# Handler qui redémarre le service Nginx lorsque la configuration du serveur a été modifiée
 - name: restart nginx
   become: true
   systemd:

@@ -1,5 +1,5 @@
+# Définit une liste d'utilisateurs ainsi que des informations tel que le groupe d'apartenance, le mot de passe (haché), la clé SSH ainsi que le shell par défaut associé à l'utilisateur et l'outre-passement du mot de passe pour les commandes sudo
 #cloud-config
-
 users:
   - name: Sarvagon
     gecos: Super adminsys

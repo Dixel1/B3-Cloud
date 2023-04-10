@@ -1,3 +1,4 @@
+# Variables qui vont être utilisées dans /tasks/vhosts.yml
 nginx_servername: test
 nginx_port: 8080
 nginx_webroot: /var/www/html/test1

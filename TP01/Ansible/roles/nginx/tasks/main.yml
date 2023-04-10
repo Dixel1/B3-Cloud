@@ -1,3 +1,5 @@
+# Définit une liste de tâches et leur fichier d'execution associé
+
 - name: Install NGINX
   import_tasks: install.yml
 
@@ -7,5 +9,5 @@
 - name: Deploy VirtualHosts
   import_tasks: vhosts.yml
 
- #- name: Handlers reload
- # import_tasks: ../handlers/handlers.yml
+ - name: Handlers reload
+  import_tasks: ../handlers/handlers.yml
