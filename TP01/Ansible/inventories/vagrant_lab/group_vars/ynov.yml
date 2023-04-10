@@ -1,25 +1,32 @@
+# Lignes tests (concervées pour base)
 #users:
 #  - le_nain
 #  - l_elfe
 #  - le_ranger
 
+# Liste des users à créer (les explications sont redondantes d'un utilisateur à l'autre)
 users:
+  # On définit un utilisateur nommé "le_nain" à créer
   - name: le_nain
-    #Hash du mot de passe "le_nain" en SHA512
+    # Hash du mot de passe "le_nain" en SHA512 permettant de se connecter en tant que cet utilisateur
     password: $6$Kq4zIOGGZoBKX7QZ$mIiLsw7OcoiCEUI4B90vA3JWZJydOyNrEQ56fmpI3BFkHQIGTKy9v9O.6WKgMvBmT6pCybIPxuz3DnmtQpWRj/
+    # Définit le chemin du répertoire de l'utilisateur sur cet hôte
     homedir: /home/le_nain
+    # Indique si l'utilisateur a les privilèges sudo ou non. Ici, l'utilisateur a les privilèges sudo
     sudo: yes
+    # Spécifie le groupe auquel appartient l'utilisateur sur cet hôte
     group: admin
+    # Cette ligne contient la clé publique SSH de l'utilisateur. Cette clé peut être utilisée pour se connecter à distance à cet hôte via SSH en utilisant la clé privée correspondante
     ssh_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDa1jE+jVEMvAp7PIX6UHnf6ZGIo8Ba6NRlDp1qTYbxlAewod/qjERYlIspUupbng8bly3UnYfUfGNAIyutonEmX2K89rOumCtyAEl2CbcB1Yjuc9uUB9sRf0C6/TVZ5GaRWeuiGpSOo7FTSz4lH1hcH63TN0uvL4x7uS4yu9DLl4WXOzd81iYyzcnOTXsWYCiwyzRwhFeB/NJp+WlmdrGuu4ZYd4BBCtkUfUmjwTr3p6JhItpCzplo7Mm6iUPsNtvF1uPUn42r3XpE7YPP9ZhDtnuKr2U1DdpIXSGeK7yUehpDc6atJ4VZUFn0RO1ZMUlrXUDiPmUi7GSFU6cHaeZdPuBosilBHJnunyrF5a7PBpHueQtMQkQBVecT0XqRLYYt7m2lEbhBpUuwbXSoR3UUPtFBQKpfee8kcbP09WJ48fQHRxO51PjAmyyICwcmK5Y+ijdQmzO840G5l8+Xl2p6leX3Y6ywqd0/xBZNPKxUAToikXIW+rPUmq9KrHigPno4d2xlNXxyRJ3kirpqztMu7AV0z/nQ5bVcHJwn2a+wt8KcCoiOFD2X0fsXURUsv2Z5yn+zzwaul2F8FDHp9VliO3EJrD600fzH8pM/dFVZ5OEYRwrmzIJqJo8KSxsVbWdY+HPzPjHNBGg4S9j2DXz2NHKbizmTxlJJyfQjLn2ETQ== schaf@DESKTOP-AEJ9M2Q
   - name: l_elfe
-    #Hash du mot de passe "l_elfe" en SHA512
+    # Hash du mot de passe "l_elfe" en SHA512
     password: $6$w0b1ptUNj8siVEXc$Zbr.8OeKdx7No3CpgswcEoDCdLxyCOpJmPR99DrJ/kkxscaJce96Xg0HA3wOmdrjGFTTrfHmNmNadaW2HaoS6/
     homedir: /home/l_elfe
     sudo: yes
     group: admin
     ssh_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDa1jE+jVEMvAp7PIX6UHnf6ZGIo8Ba6NRlDp1qTYbxlAewod/qjERYlIspUupbng8bly3UnYfUfGNAIyutonEmX2K89rOumCtyAEl2CbcB1Yjuc9uUB9sRf0C6/TVZ5GaRWeuiGpSOo7FTSz4lH1hcH63TN0uvL4x7uS4yu9DLl4WXOzd81iYyzcnOTXsWYCiwyzRwhFeB/NJp+WlmdrGuu4ZYd4BBCtkUfUmjwTr3p6JhItpCzplo7Mm6iUPsNtvF1uPUn42r3XpE7YPP9ZhDtnuKr2U1DdpIXSGeK7yUehpDc6atJ4VZUFn0RO1ZMUlrXUDiPmUi7GSFU6cHaeZdPuBosilBHJnunyrF5a7PBpHueQtMQkQBVecT0XqRLYYt7m2lEbhBpUuwbXSoR3UUPtFBQKpfee8kcbP09WJ48fQHRxO51PjAmyyICwcmK5Y+ijdQmzO840G5l8+Xl2p6leX3Y6ywqd0/xBZNPKxUAToikXIW+rPUmq9KrHigPno4d2xlNXxyRJ3kirpqztMu7AV0z/nQ5bVcHJwn2a+wt8KcCoiOFD2X0fsXURUsv2Z5yn+zzwaul2F8FDHp9VliO3EJrD600fzH8pM/dFVZ5OEYRwrmzIJqJo8KSxsVbWdY+HPzPjHNBGg4S9j2DXz2NHKbizmTxlJJyfQjLn2ETQ== schaf@DESKTOP-AEJ9M2Q
   - name: le_ranger
-    #Hash du mot de passe "le_ranger" en SHA512
+    # Hash du mot de passe "le_ranger" en SHA512
     password: $6$eE1su1/UeOa4p3N3$RX.9IeZoBX6RLhUbm2Z.s3mIF2W7dd3HxD9eY2N88ILOyG6kEZCm37DXMZngVKlG5OmwscdUiK2QSK3.9Sd4D/
     homedir: /home/le_ranger
     sudo: yes

@@ -2,6 +2,7 @@
   hosts: ynov
   become: true
 
+# Définit une liste de tâches à effectuer (ici, l'installation du package "vim" en utilisant le package manager "dnf")
   tasks:
   - name: Install vim
     dnf:

@@ -1,5 +1,5 @@
 # B3-Cloud-TP00
-Dans ce premier TP, nous abordons les notions de Vagrant et Ansible.Pour mener à bien ce TP, nous avons ici utilisé une machine Windows hybride Linux (Windows avec WSL). 
+Dans ce premier TP, nous abordons les notions de Vagrant et Ansible. Pour mener à bien ce TP, nous avons ici utilisé une machine Windows hybride Linux (Windows avec WSL). 
 
 ## Vagrant
 ### Qu'est-ce que Vagrant ?
@@ -40,3 +40,4 @@ Il s'agit d'un fichier d’inventaire. Il permet de décrire les hôtes et les g
 [db]
 10.1.1.12
 ```
+## Note : Ce TP contient des commentaires dont il ne faut pas tenir comptes (généralement du code mis en commentaire et précisé comme servant pour effectuer des tests).

@@ -1,6 +1,7 @@
+# Définit une tâche d'installation des packages en utilisant le fichier "packages.yml"
 - name: Install common packages
   import_tasks: packages.yml
 
+# Définit une tâche de création d'usilisateurs en utilisant le fichier "users.yml"
 - name: Create users
   import_tasks: users.yml
-

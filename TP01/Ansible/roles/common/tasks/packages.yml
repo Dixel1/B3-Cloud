@@ -1,3 +1,4 @@
+# Définit l'installation des packages suivants des variables (common_packages). La liste des packages à installer se situe dans "../defaults/main.yml"
 - name: Install common packages
   become: true
   ansible.builtin.package:

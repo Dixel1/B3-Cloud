@@ -1,19 +1,25 @@
 ---
+# Nom du playbook. Il sert à identifier le playbook dans le rapport d'exécution Ansible
 - name: Install nginx
   hosts: tp1
   become: true
 
   tasks:
+  # On définit une tâche Ansible qui utilise le module "dnf" pour installer le package nginx en utilisant le package manager "dnf"
   - name: Install nginx
     dnf:
       name: nginx
       state: present
 
+  # On définit une tâche qui va permettre d'ajouter un fichier index.html
   - name: Insert Index Page
+    # Déclaration du module Ansible utilisé, ici "template"
     template:
+      # Spécifie le chemin et la destination du fichier de modèle source
       src: index.html.j2
       dest: /usr/share/nginx/html/index.html
 
+  # On définit une tâche de démarrage du service nginx
   - name: Start NGiNX
     service:
       name: nginx

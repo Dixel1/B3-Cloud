@@ -1,3 +1,4 @@
+# Utilisé pour des tests
 #- name: Create common users
 #  become: true
 #  ansible.builtin.user:
@@ -5,6 +6,7 @@
 #    state: present
 #  with_items: "{{ users }}" # ceci permet de boucler sur la liste common_users0
 
+# Définit les utilisateurs à créer en utilisant des variables. La liste des utilisateurs à installer se situe dans le chemin relatif "TP01/Ansible/inventories/vagrant_lab/group_vars/ynov.yml"
 - name: Create common users
   become: true
   ansible.builtin.user:

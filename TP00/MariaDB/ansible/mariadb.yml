@@ -5,8 +5,7 @@
   # Donne les privilèges root pour exécuter les tâches
   become: yes
 
-  # Tâche d'installation MariaDB-server et python3-PyMySQL
-  tasks:
+    tasks:
     # On définit une tâche d'installation des packages mariadb-server et python3-PyMySQL en utilisant "dnf" en package manager
     - name: Installation de MariaDB
       dnf:

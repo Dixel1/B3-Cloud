@@ -1,3 +1,4 @@
+# Similaire à .ssh-config de MariaDB
 Host 10.1.1.*
   User user1
   UserKnownHostsFile /dev/null

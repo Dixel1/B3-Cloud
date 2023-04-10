@@ -1,49 +1,77 @@
 ---
+#NOTE : LE PRINCIPE DE FONCTIONNEMENT GLOBALE DU FICHIER EST SIMILAIRE A "mariadb.yml" avec de nouveaux apports
 - name: Déploiement d'un serveur NGINX
+  # Spécifie les noms des hôtes qui recevront cette tâche.
   hosts: web
+  # Donne les privilèges root pour exécuter les tâches
   become: true
 
   tasks:
+    # On définir une tâche d'installation du package nginx en utilisant "dnf" en package manager
     - name: Installation de NGINX
       dnf:
         name: nginx
         state: present
 
+    # On définit une tâche de copie du certificat et de la clé
     - name: Copie du certificat et de la clé
       copy:
+        # On va utiliser des variables avec conditions pour copier le certificat ou la clé et les placer au bon endroit
         src: "{{ item }}"
         dest: "/etc/pki/tls/{{ 'certs' if 'crt' in item else 'private' }}/{{ item }}"
+        # Définit les permissions du fichiers copié (seul le propriétaire à la permission de lire et d'écrire dans le fichier)
+        # Cela peut être utile pour garantir la sécurité des clés privées ou d'autres fichiers sensibles sur un système.
         mode: '0600'
+      # Indique les fichiers qui seront utilisés en variables
       with_items:
         - "server.crt"
         - "server.key"
 
+    # On définit une tâche de création d'une racine web et d'un index
     - name: Création de la racine web et de l'index
       file:
+        # Ceci est le chemin du répertoire à créer
         path: /var/www/tp1_site
+        # Définit l'état du fichier ou du répertoire, ici "directory" pour créer un répertoire.
         state: directory
+        # Définit l'utilisateur propriétaire du répertoire
         owner: nginx
+        # Définit le groupe propriétaire du répertoire
         group: nginx
 
+    # On définit une tâche de création d'un fichier index.html
     - name: Création du fichier index.html
       copy:
+        # Indique l'endroit où sera créé le fichier index.html
         dest: /var/www/tp1_site/index.html
+        # Définit le contenu de ce fichier
         content: "<h1>Ceci est un test</h1>"
+        # Définit l'utilisateur propriétaire et le groupe propriétaire du fichier
         owner: nginx
         group: nginx
 
+    # On définit une tâche de déploiement du fichier de configuration NGINX
     - name: Déploiement du fichier de configuration NGINX
       copy:
+        # Indique la source du fichier nginx.conf
         src: files/nginx.conf
+        # Indique l'endroit où sera placé ce fichier et son nom
         dest: /etc/nginx/conf.d/tp1_site.conf
 
+    # On définit une tâche de configuration du firewall pour autoriser l'ouverture des ports 443/TCP
     - name: Ouverture du port 443/TCP dans le firewall
+      # "firewalld" est le module Ansible utilisé pour configurer le firewall
       firewalld:
+        # Indique que la règle créée doit être persistante.
         permanent: yes
+        # Indique que la règle doit être immédiatement applicable.
         immediate: yes
+        # Spécifie le port et le protocole à ouvrir (TCP sur le port 443).
         port: "443/tcp"
+        # Active la règle de pare-feu
         state: enabled
 
+    # On définit une tâche de redémarrage du service NGINX
     - name: Redémarrage du service NGINX
       service:
         name: nginx

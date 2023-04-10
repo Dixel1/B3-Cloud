@@ -1,6 +1,6 @@
-- hosts: ynov
-  become: true
-  roles:
+- hosts: ynov # Définit un playbook Ansible nommé "main.yml" qui sera exécuté sur les hôtes appartenant au groupe "ynov"
+  become: true # Indique un lancement avec les privilèges d'administration
+  roles: # Indique qu'il faut exécuter une série de rôles Ansible pour configurer les hôtes : common, nginx, webapp
     - common
     - nginx
     - webapp

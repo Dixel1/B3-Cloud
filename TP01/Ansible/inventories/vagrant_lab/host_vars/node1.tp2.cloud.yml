@@ -1,7 +1,10 @@
+# Définit une variable "common_packages" qui est une liste de packages à installer : vim, git et rsync
 common_packages:
   - vim
   - git
   - rsync
+# Définit une variable vhosts qui est une liste de deux éléments,
+# chaque élément est un dictionnaire qui contient les informations nécessaires pour configurer un virtual host Nginx
 vhosts:
   - test2:
     nginx_servername: test2

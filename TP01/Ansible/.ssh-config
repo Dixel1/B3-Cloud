@@ -1,3 +1,4 @@
+# Spécifie l'adresse IP des hôtes cibles
 Host node*.tp2.cloud
   User user1
   UserKnownHostsFile /dev/null

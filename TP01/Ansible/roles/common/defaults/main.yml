@@ -1,3 +1,4 @@
+# Liste des packages à installer (ce sont des variables qui vont être utilisées)
 common_packages:
   - vim
   - git
