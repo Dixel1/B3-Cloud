@@ -1,7 +1,14 @@
+# Spécifie l'adresse IP des hôtes cibles.
 Host 10.1.1.*
+# "User user1" indique le nom d'utilisateur utilisé pour la connexion.
   User user1
+# Désactive la vérification de l'hôte connu pour éviter les erreurs liées aux clés SSH.  
   UserKnownHostsFile /dev/null
+# Désactive également la vérification stricte de la clé de l'hôte connu.
   StrictHostKeyChecking no
+# Désactive l'authentification par mot de passe, forçant l'utilisation de clés SSH uniquement.
   PasswordAuthentication no
+# "IdentitiesOnly yes" indique que seules les clés SSH spécifiées seront utilisées pour la connexion.
   IdentitiesOnly yes
+# Définit le niveau de journalisation minimal à "FATAL".
   LogLevel FATAL

@@ -1,40 +1,60 @@
 ---
 - name: Install MariaDB
+  # Spécifie les noms des hôtes qui recevront cette tâche.
   hosts: db
+  # Donne les privilèges root pour exécuter les tâches
   become: yes
 
+  # Tâche d'installation MariaDB-server et python3-PyMySQL
   tasks:
+    # On définit une tâche d'installation des packages mariadb-server et python3-PyMySQL en utilisant "dnf" en package manager
     - name: Installation de MariaDB
       dnf:
         name:
           - mariadb-server
           - python3-PyMySQL
         state: present
-
+    # On définit une tâche de redémarrage du service mariadb
     - name: Redémarrage du serveur MariaDB
+      # On précise un service
       service:
+        # Spécifie le service sur lequel on va effectuer l'opération
         name: mariadb
+        # On redémarre le service
         state: restarted
 
+#Tâche test de connexion à la base SQL 
 #    - name: Connexion à la base SQL
 #      mysql_user:
 #        login_unix_socket: /var/lib/mysql/mysql.sock
 #        login_user: root
 #        name: root
 
+    # On définit une tâche de création d'un utilisateur SQL
     - name: Création d'un utilisateur SQL
+      # "mysql_user" est le module Ansible utilisé pour créer un utilisateur SQL
       mysql_user:
+        # spécifie l'emplacement du socket MySQL pour la connexion à la base de données
         login_unix_socket: /var/lib/mysql/mysql.sock
+        # spécifie le nom d'utilisateur utilisé pour se connecter à la base de données
         login_user: root
+        # spécifie le nom de l'utilisateur à créer et son mot de passe
         name: user1
         password: "P@ssword"
-        #name: admin
+        # Donne tous les privilèges sur toutes les bases de données
         priv: "*.*:ALL"
+        # Indique que l'utilisateur SQL doit être créé s'il n'existe pas déjà
         state: present
 
+    # On définit une tâche de création de base de données
     - name: Créer une base de données
+      # "mysql_db" est le module Ansible utilisé pour créer une base de données MySQL
       mysql_db:
+        # Spécifie le nom de la base de données que nous allons créer
         name: mydb
+        # Indique que la base de données doit être créée si elle n'existe pas déjà
         state: present
+        # Spécifie le nom d'utilisateur utilisé pour se connecter à la base de données
         login_user: user1
+        # Spécifie le mot de passe à utiliser
         login_password: P@ssword
