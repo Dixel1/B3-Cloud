@@ -125,6 +125,14 @@ resource "azurerm_linux_virtual_machine" "node2" {
     version   = "latest"
   }
   
+/*Autre source_image_reference pour tests
+  source_image_reference {
+    publisher = "erockyenterprisesoftwarefoundationinc1653071250513"
+    offer     = "rockylinux-9"
+    sku       = "rockylinux-9"
+    version   = "9.1.20230215"
+  }
+*/
   plan {
     publisher = "erockyenterprisesoftwarefoundationinc1653071250513"
     name      = "rockylinux-9"
