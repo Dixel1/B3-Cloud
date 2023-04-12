@@ -10,4 +10,4 @@
   import_tasks: vhosts.yml
 
  - name: Handlers reload
-  import_tasks: ../handlers/handlers.yml
+  import_tasks: ../handlers/main.yml

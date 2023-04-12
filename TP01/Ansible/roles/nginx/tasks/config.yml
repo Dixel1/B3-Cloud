@@ -1,4 +1,4 @@
-# Définit une tâche qui copie un fichier de configuration nginx au chemin "/etc/nginx/nginx.conf" du serveur nginx
+# Définit une tâche qui copie un fichier de configuration nginx au chemin "/etc/nginx/nginx.conf" du serveur nginx et trigger un handler à chaque modification
 - name : Main NGINX config file
   become: true
   copy:

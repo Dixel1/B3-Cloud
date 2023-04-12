@@ -7,3 +7,10 @@
   ansible.builtin.package:
     name: nginx
     state: present
+
+# Définit une tâche de démarrage du service nginx
+- name: Start NGINX
+  become: true
+  service:
+    name: nginx
+    state: started
