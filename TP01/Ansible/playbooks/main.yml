@@ -1,6 +1,16 @@
-- hosts: ynov # Définit un playbook Ansible nommé "main.yml" qui sera exécuté sur les hôtes appartenant au groupe "ynov"
+- hosts: ynov # Définit un playbook Ansible qui sera exécuté sur les hôtes appartenant au groupe "ynov"
   become: true # Indique un lancement avec les privilèges d'administration
-  roles: # Indique qu'il faut exécuter une série de rôles Ansible pour configurer les hôtes : common, nginx, webapp
+  roles: # Indique qu'il faut exécuter une série de rôles Ansible pour configurer les hôtes : common, nginx
     - common
     - nginx
+
+- hosts: rproxy # Définit un playbook Ansible qui sera exécuté sur les hôtes appartenant au groupe "rproxy"
+  become: true # Indique un lancement avec les privilèges d'administration
+  roles: # Indique qu'il faut exécuter une série de rôles Ansible pour configurer les hôtes : rproxy
+    - rproxy
+
+- hosts: webapp # Définit un playbook Ansible qui sera exécuté sur les hôtes appartenant au groupe "webapp"
+  become: true # Indique un lancement avec les privilèges d'administration
+  roles: # Indique qu'il faut exécuter une série de rôles Ansible pour configurer les hôtes : webapp
     - webapp
+

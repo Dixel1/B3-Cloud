@@ -132,10 +132,10 @@ resource "azurerm_linux_virtual_machine" "node2" {
     sku       = "rockylinux-9"
     version   = "9.1.20230215"
   }
-*/
+
   plan {
     publisher = "erockyenterprisesoftwarefoundationinc1653071250513"
     name      = "rockylinux-9"
     product   = "rockylinux-9"
-  }
+  }*/
 }
