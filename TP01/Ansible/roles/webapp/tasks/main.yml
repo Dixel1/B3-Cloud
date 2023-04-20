@@ -1,18 +1,10 @@
----
-# Définit une tâche d'installation du package Apache2 en utilisant le package manager "dnf"
-- name: Install web server
-  dnf:
-    name: apache2
-    state: present
+# Définit une liste de tâches et leur fichier d'execution associé
 
-# Définit une tâche qui va copier le fichier présent dans "files/index.html" vers "/var/www/html/" du serveur
-- name: Copy web application files
-  copy:
-    src: files/index.html
-    dest: /var/www/html/
+- name: Install NGINX
+  import_tasks: install.yml
 
-# Définit une tâche qui va démarrer le service apache2
-- name: Start web server
-  service:
-    name: apache2
-    state: started
+- name: Configure NGINX
+  import_tasks: config.yml
+
+- name: Deploy VirtualHosts
+  import_tasks: vhosts.yml

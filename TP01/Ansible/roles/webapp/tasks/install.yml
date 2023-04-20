@@ -1,0 +1,16 @@
+# Définit une tâche d'installation du package nginx
+# "ansible.builtin.package" est un module Ansible qui permet d'installer, 
+# de mettre à jour ou de supprimer des packages logiciels sur des systèmes distants,
+# il prend en charge différents gestionnaires de packages tels que apt, yum, dnf, pacman, etc.
+- name: Install NGINX
+  become: true
+  ansible.builtin.package:
+    name: nginx
+    state: present
+
+# Définit une tâche de démarrage du service nginx
+- name: Start NGINX
+  become: true
+  service:
+    name: nginx
+    state: started
