@@ -1,0 +1,112 @@
+# Tasks file for Mumble role
+
+- name: Download Mumble server package
+  become: true
+  ansible.builtin.get_url:
+    url: "{{ mumble_package_url }}"
+    dest: "{{ mumble_package_dest }}"
+
+- name: Unzip Mumble server package & create path
+  become: true
+  ansible.builtin.command: 
+    cmd: tar -vxjf {{ mumble_package_dest }}
+    creates: /usr/local/murmur"
+
+- name: Copy Mumble server extract 
+  become: true
+  ansible.builtin.command: 
+    cmd: sudo cp -r ./murmur-static_x86-1.2.9/ /usr/local/murmur/
+
+- name: Copy & place murmur service file 
+  become: true
+  ansible.builtin.command: 
+    cmd: sudo cp ./murmur-static_x86-1.2.9/murmur.ini /etc/murmur.ini
+
+- name: Remove murmur user (it's a way to solve a mumble bug at initial statup, can be removed if not needed) 
+  become: true
+  ansible.builtin.command: sudo userdel murmur
+
+- name: Create murmur group 
+  become: true
+  ansible.builtin.command: 
+    cmd: sudo groupadd -r murmur
+
+- name: Create murmur user & attach to murmur group & create murmur log directory
+  become: true
+  ansible.builtin.command: 
+    cmd: sudo useradd -r -g murmur -d /var/lib/murmur -s /sbin/nologin murmur
+
+- name: Create murmur log directory
+  become: true
+  ansible.builtin.command: 
+    cmd: sudo mkdir /var/log/murmur
+
+- name: Change ownership of murmur log directory 
+  become: true
+  ansible.builtin.command: sudo chown murmur:murmur /var/log/murmur
+
+- name: Change permissions of murmur log directory
+  become: true
+  ansible.builtin.command: sudo chmod 0770 /var/log/murmur
+
+- name: Configure Mumble server
+  become: true
+  template:
+    src: murmur.ini.j2
+    dest: /etc/murmur.ini
+  #notify:
+   # - Restart Mumble service
+
+- name: Place murmur service file at /etc/systemd/system/
+  become: true
+  copy:
+    src: murmur.service
+    dest: /etc/systemd/system/murmur.service
+
+- name: Place murmur service file at /lib/systemd/system/
+  become: true
+  copy:
+    src: murmur.service
+    dest: /lib/systemd/system/murmur.service
+
+- name: Place murmur configuration file
+  become: true
+  copy:
+    src: murmur.conf 
+    dest: /etc/tmpfiles.d/murmur.conf
+
+- name: Setup logrotate
+  become: true
+  copy:
+    src: murmur 
+    dest: /etc/logrotate.d/murmur
+
+- name: Copy firewalld configuration file
+  become: true
+  copy:
+    src: murmur.xml
+    dest: /etc/firewalld/services/murmur.xml
+
+- name: Set firewalld permissions using configuration file
+  become: true
+  ansible.builtin.command: sudo firewall-cmd --permanent --add-service=murmur
+
+- name: Reload firewalld
+  become: true
+  ansible.builtin.command: sudo firewall-cmd --reload
+
+- name: System update
+  become: true
+  ansible.builtin.command: sudo systemd-tmpfiles --create /etc/tmpfiles.d/murmur.conf
+
+- name: Reload systemctl daemon
+  become: true
+  ansible.builtin.command: sudo systemctl daemon-reload
+
+- name: Start murmur service now
+  become: true
+  ansible.builtin.command: sudo systemctl start murmur.service
+
+- name: Autostart murmur service at boot
+  become: true
+  ansible.builtin.command: sudo systemctl enable murmur.service

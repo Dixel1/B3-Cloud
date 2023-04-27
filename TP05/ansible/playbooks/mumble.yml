@@ -1,0 +1,4 @@
+- hosts: mumble
+  become: true
+  roles:
+    - mumble

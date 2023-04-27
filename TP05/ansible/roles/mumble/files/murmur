@@ -1,0 +1,12 @@
+/var/log/murmur/*log {
+    su murmur murmur
+    dateext
+    rotate 4
+    missingok
+    notifempty
+    sharedscripts
+    delaycompress
+    postrotate
+        /bin/systemctl reload murmur.service > /dev/null 2>/dev/null || true
+    endscript
+}

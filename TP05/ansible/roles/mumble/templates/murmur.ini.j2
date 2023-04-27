@@ -1,0 +1,9 @@
+database=/var/lib/murmur/murmur.sqlite
+logfile=/var/log/murmur/murmur.log
+pidfile=/var/run/murmur/murmur.pid
+# Reminder: When changing the port that murmur will listen to you will need to also update the firewall.
+# Update the firewall by editing /etc/firewalld/services/murmur.xml
+# Then run "sudo firewall-cmd --reload"
+port={{mumble_port}}
+# Comment out the following setting since the service will already be executing as the correct user:
+# uname=murmur
