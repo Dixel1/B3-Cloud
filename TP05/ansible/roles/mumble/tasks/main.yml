@@ -22,7 +22,7 @@
   ansible.builtin.command: 
     cmd: sudo cp ./murmur-static_x86-1.2.9/murmur.ini /etc/murmur.ini
 
-- name: Remove murmur user (it's a way to solve a mumble bug at initial statup, can be removed if not needed) 
+- name: Remove murmur user (it's a way to solve a mumble bug at initial startup, can be removed if not needed) 
   become: true
   ansible.builtin.command: sudo userdel murmur
 
@@ -54,8 +54,6 @@
   template:
     src: murmur.ini.j2
     dest: /etc/murmur.ini
-  #notify:
-   # - Restart Mumble service
 
 - name: Place murmur service file at /etc/systemd/system/
   become: true
