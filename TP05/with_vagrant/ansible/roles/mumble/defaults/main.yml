@@ -1,0 +1,24 @@
+# Default variables for Mumble role
+
+# Mumble server configuration
+mumble_port: 64738
+mumble_password: P@ssword
+mumble_max_users: 100
+mumble_ini_file: mumble-server.ini.j2
+
+# Mumble path configuration
+mumble_ini_path: /etc/mumble-server.ini
+
+# Firewall configuration
+mumble_firewall_allowed_ports:
+  - "{{ mumble_port }}/tcp"
+
+# Packages information
+mumble_package_name: mumble-server
+mumble_package_url: https://github.com/mumble-voip/mumble/releases/download/1.2.9/murmur-static_x86-1.2.9.tar.bz2
+mumble_package_dest: ./murmur-static_x86-1.2.9.tar.bz2
+firewall_package_name: firewalld
+mumble_package_state: present
+
+# Path to store Mumble SSL certificates (only if you've a valid SSL certificate, otherwise mumble will generate a self-signed certificate)
+mumble_ssl_cert_path: /etc/mumble-server/

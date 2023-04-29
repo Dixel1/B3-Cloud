@@ -61,6 +61,16 @@ resource "azurerm_linux_virtual_machine" "vm-b3-mumble" {
     azurerm_network_interface.nic-b3-mumble.id,
   ]
 
+/*provisioner "remote-exec" {
+inline=[
+        # Install Ansible
+        "sudo dnf update",
+        "sudo dnf install -y software-properties-common",
+        "sudo dnf-add-repository --yes --update ppa:ansible/ansible",
+        "sudo dnf install -y ansible"
+]
+}*/
+
   admin_ssh_key {
     username   = "Sarvagon"
     public_key = file("C:/Users/schaf/.ssh/id_rsa.pub")
@@ -72,10 +82,35 @@ resource "azurerm_linux_virtual_machine" "vm-b3-mumble" {
   }
 
   source_image_reference {
-    publisher = "Debian"
-    offer     = "Debian-10"
-    sku       = "10"
-    version   = "latest"
+    publisher = "erockyenterprisesoftwarefoundationinc1653071250513"
+    offer     = "rockylinux"
+    sku       = "free"
+    version = "8.7.20230215"
+  }
+
+  plan {
+    name = "free"
+    product = "rockylinux"
+    publisher = "erockyenterprisesoftwarefoundationinc1653071250513"
+  }
+
+  provisioner "remote-exec" {
+    connection {
+      type        = "ssh"
+      user        = "Sarvagon"
+      private_key = file("C:/Users/schaf/.ssh/id_rsa")
+      host        = self.public_ip_address
+    }
+    inline=[
+        # Install Ansible
+        # "sudo dnf update -y",
+        "sudo dnf install -y epel-release",
+        "sudo dnf install -y ansible",
+        "sudo sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config",
+        "sudo setenforce 0",
+        # Install firewalld & start firewalld service
+        "sudo dnf install -y firewalld",
+        "sudo systemctl start firewalld"
+    ]
   }
 }
-

@@ -1,0 +1,23 @@
+---
+# Handlers file for Mumble role
+
+- name: Restart Mumble service
+  systemd:
+    name: mumble-server
+    state: restarted
+
+- name: Reload firewall
+  firewalld:
+    state: reloaded
+
+- name: Allow Mumble traffic
+  firewalld:
+    rule: allow
+    port: "{{ mumble_port }}"
+    proto: udp
+
+- name: Allow Mumble control traffic
+  firewalld:
+    rule: allow
+    port: "{{ mumble_control_port }}"
+    proto: tcp

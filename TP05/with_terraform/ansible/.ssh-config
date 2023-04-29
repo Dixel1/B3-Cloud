@@ -1,0 +1,8 @@
+# Spécifie l'adresse IP des hôtes cibles
+Host 20.25.124.54
+  User Sarvagon
+  UserKnownHostsFile /dev/null
+  StrictHostKeyChecking no
+  PasswordAuthentication no
+  IdentitiesOnly yes
+  LogLevel FATAL
