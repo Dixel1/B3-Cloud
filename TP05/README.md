@@ -60,7 +60,7 @@ Apr 29 22:00:14 b3-mumble systemd[1]: Failed to start Mumble Server (Murmur).
 ```
 Je n'ai pas trouvé de documentation fiable concernant ce problème ni comment le résoudre. Ce qui est étonnant, c'est que j'ai utilisé exactement la même configuration Ansible pour la version vagrant avec Rocky 9, et ça fonctionne... J'ai donc comparé les deux versions (machine créée avec vagrant et terraform), la configuration est mise tout pareil dans les deux, avec les mêmes permissions sur tout les fichiers/dossiers (notamment le chemin **```/var/run/murmur/murmur.pid```** indiqué en erreur), les mêmes utilisateurs et groupes, vraiment tout est identique, mais sur Rocky 8 rien à faire. 
 
-Après de multiples recherches, il était conseillé de mettre la ligne PID de mon fichier service en commentaire pour résoudre (parfois) le problème, j'ai essayé et je n'ai plus d'erreur lors de l'execution de la commande **```sudo systemctl start murmur.service```** puisque le service reste en status dead sans erreur de démararge du service (service zombi). 
+Après de multiples recherches, il était conseillé de mettre la ligne PID de mon fichier service en commentaire pour résoudre (parfois) le problème, j'ai essayé et je n'ai plus d'erreur lors de l'execution de la commande **```sudo systemctl start murmur.service```** puisque le service reste en status dead sans erreur de démarrage du service (service zombi). 
 
 Même le faire à la main sur une VM Rocky 8 et Rocky 9 pour être sûr de tout faire pareil me fait arriver au même résultat : aucun problème avec Rocky 9 mais Rocky 8 refuse de me démarrer le **```murmur.service```**
 
