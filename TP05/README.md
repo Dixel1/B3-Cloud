@@ -40,7 +40,7 @@ Ce TP Final reprend une grande partie des notions abordées au long de cette ann
 - Vous avez désormais un serveur Mumble fonctionnel, pour vous connecter, installez la solution cliente Mumble en suivant les instructions sur https://www.mumble.info/downloads/ et entrez la Public IP de votre VM Azure dans le logiciel client.
 
 ## Impossible de démarrer le murmur.service sur CentOS 8 / Rocky 8 :
-Lors du déploiement sur Azure en utlisant Terraform et Ansible, vous risquez de rencontrer un bug empéchant le service murmur de démarrer.
+Lors du déploiement sur Azure en utilisant Terraform et Ansible, vous risquez de rencontrer un bug empéchant le service murmur de démarrer.
 ```bash
 [Sarvagon@b3-mumble ~]$ sudo journalctl -xe
 Apr 29 22:00:14 b3-mumble systemd[1]: murmur.service: Failed with result 'protocol'.
