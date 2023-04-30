@@ -61,16 +61,6 @@ resource "azurerm_linux_virtual_machine" "vm-b3-mumble" {
     azurerm_network_interface.nic-b3-mumble.id,
   ]
 
-/*provisioner "remote-exec" {
-inline=[
-        # Install Ansible
-        "sudo dnf update",
-        "sudo dnf install -y software-properties-common",
-        "sudo dnf-add-repository --yes --update ppa:ansible/ansible",
-        "sudo dnf install -y ansible"
-]
-}*/
-
   admin_ssh_key {
     username   = "Sarvagon"
     public_key = file("C:/Users/schaf/.ssh/id_rsa.pub")

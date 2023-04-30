@@ -1,3 +1,6 @@
 # Ignore le dossier .terraform et son contenu
 .terraform
 .vagrant
+.lock.hcl
+.tfstate
+.backup
